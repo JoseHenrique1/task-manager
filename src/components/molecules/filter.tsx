@@ -16,7 +16,7 @@ export function Filter() {
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Fruits</SelectLabel>
+          <SelectLabel>States</SelectLabel>
           <SelectItem value="all">All</SelectItem>
           <SelectItem value="active">Active</SelectItem>
           <SelectItem value="completed">Completed</SelectItem>

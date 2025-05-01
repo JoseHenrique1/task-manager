@@ -1,14 +1,11 @@
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
-import { Plus } from "lucide-react"
 import { Filter } from "../molecules/filter"
+import { TaskForm } from "../molecules/task-form"
 
 export function ManagerTasks() {
   return (
-    <div className="flex gap-2 px-4 py-0">
-      <Input placeholder="Search task" className="text-sm placeholder:text-sm" />
+    <div className="flex flex-wrap gap-2 px-4 py-0 sm:justify-between">
+      <TaskForm />
       <Filter />
-      <Button><Plus /></Button>
     </div>
   )
 }
