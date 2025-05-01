@@ -1,15 +1,23 @@
-import { createContext, useContext, ReactNode, useReducer } from 'react';
+import { createContext, useContext, ReactNode, useReducer, useState } from 'react';
 import { initialState, taskReducer, type Task } from './task-reducer';
+
+type Status = "all" | "active" | "completed";
 
 interface TaskContextType {
   tasks: Task[],
   add: (title: string) => void,
-  remove: (id: string) => void
+  remove: (id: string) => void,
+  update: (id: string, completed: boolean) => void,
+  status: Status,
+  changeStatus: (status: Status) => void
 }
 
-const TaskContext = createContext<TaskContextType | undefined>({} as TaskContextType);
+
+
+const TaskContext = createContext<TaskContextType>({} as TaskContextType);
 
 export function TaskProvider ({ children }: { children: ReactNode }) {
+  const [status, setStatus] = useState<Status>("all")
   const [state, dispatch] = useReducer(taskReducer, initialState);
 
   function add(title: string) {
@@ -32,11 +40,28 @@ export function TaskProvider ({ children }: { children: ReactNode }) {
     })
   }
 
+  function update(id: string, completed: boolean) {
+    dispatch({
+      type: 'update',
+      payload: {
+        id,
+        completed
+      }
+    })
+  }
+
+  function changeStatus(status: Status) {
+    setStatus(status)
+  }
+
   return (
     <TaskContext.Provider value={{ 
         tasks: state.tasks,
         add,
-        remove
+        remove,
+        update,
+        status,
+        changeStatus
     }}>
       {children}
     </TaskContext.Provider>
@@ -45,6 +70,5 @@ export function TaskProvider ({ children }: { children: ReactNode }) {
 
 export function useTask  (): TaskContextType {
   const context = useContext(TaskContext);
-  if (!context) throw new Error('useTask deve ser usado dentro de TaskProvider');
   return context;
 };

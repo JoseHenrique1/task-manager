@@ -7,10 +7,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { useTask } from "@/context/task-context";
+
+type Status = "all" | "active" | "completed";
 
 export function Filter() {
+  const {status, changeStatus} = useTask()
   return (
-    <Select>
+    <Select value={status} onValueChange={(value) =>changeStatus(value as Status)}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select state" />
       </SelectTrigger>

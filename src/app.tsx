@@ -5,7 +5,7 @@ import { TaskProvider } from "./context/task-context";
 function App() {
   return (
     <TaskProvider>
-      <div>
+      <div className="max-w-3xl mx-auto">
         <Header />
         <main>
           <ManagerTasks />
