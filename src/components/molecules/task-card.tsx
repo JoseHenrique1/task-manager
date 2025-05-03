@@ -20,7 +20,7 @@ export function TaskCard({ title, completed, id }: props) {
   }
 
   return (
-    <div className="flex justify-between ">
+    <div className="flex justify-between card">
       <p>{title}</p>
       <div className="space-x-2">
         <Switch checked={completed} onCheckedChange={handleUpdate}/>
