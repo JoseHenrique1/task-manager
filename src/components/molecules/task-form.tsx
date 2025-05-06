@@ -10,7 +10,7 @@ export function TaskForm() {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const title = formData.get("title") as string;
-    add(title)
+    title.trim() !== "" && add(title)
     event.currentTarget.reset()
   }
 
