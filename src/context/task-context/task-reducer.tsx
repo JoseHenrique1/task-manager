@@ -30,24 +30,9 @@ interface TaskActionUpdateCompleted {
 
 type TaskAction = TaskActionAdd | TaskActionRemove | TaskActionUpdateCompleted
 
+const tasks: Task[] = JSON.parse(localStorage.getItem("tasks") ?? "[]")
 export const initialState: TaskState = {
-  tasks: [
-    {
-      id: "1",
-      title: "Task 1",
-      completed: false
-    },
-    {
-      id: "2",
-      title: "Task 2",
-      completed: false
-    },
-    {
-      id: "3",
-      title: "Task 3",
-      completed: false
-    }
-  ],
+  tasks
 }
 
 export function taskReducer(state: TaskState, action: TaskAction) {

@@ -1,23 +1,15 @@
 import { Switch } from "../ui/switch";
 import { ButtonTrash } from "../atoms/button-trash";
-import { useTask } from "@/context/task-context";
 
 interface props {
   title: string,
   completed: boolean,
-  id: string
+  id: string,
+  handleRemove: () => void,
+  handleUpdate: () => void
 }
-export function TaskCard({ title, completed, id }: props) {
+export function TaskCard({ title, completed, handleRemove, handleUpdate }: props) {
   
-  const { remove, update } = useTask();
-
-  function handleRemove() {
-    remove(id)
-  }
-
-  function handleUpdate() {
-    update(id, !completed)
-  }
 
   return (
     <div className="flex justify-between card">

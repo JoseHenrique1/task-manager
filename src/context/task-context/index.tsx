@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode, useReducer, useState } from 'react';
+import { createContext, useContext, ReactNode, useReducer, useState, useEffect } from 'react';
 import { initialState, taskReducer, type Task } from './task-reducer';
 
 type Status = "all" | "active" | "completed";
@@ -19,6 +19,14 @@ const TaskContext = createContext<TaskContextType>({} as TaskContextType);
 export function TaskProvider ({ children }: { children: ReactNode }) {
   const [status, setStatus] = useState<Status>("all")
   const [state, dispatch] = useReducer(taskReducer, initialState);
+
+  function setTasksLocalStorage(tasks: Task[]) {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }
+
+  useEffect(() => {
+    setTasksLocalStorage(state.tasks)
+  }, [state.tasks])
 
   function add(title: string) {
     dispatch({
